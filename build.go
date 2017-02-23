@@ -60,6 +60,8 @@ type culprit struct {
 
 type generalObj struct {
 	Parameters              []parameter              `json:"parameters"`
+	ActionClass             string                   `json:"_class"`
+	QueuingDurationMillis   *int64                   `json:"queuingDurationMillis"`
 	Causes                  []map[string]interface{} `json:"causes"`
 	BuildsByBranchName      map[string]Builds        `json:"buildsByBranchName"`
 	LastBuiltRevision       BuildRevision            `json:"lastBuiltRevision"`

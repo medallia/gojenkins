@@ -193,6 +193,18 @@ func (j *Job) GetAllBuildIds() ([]JobBuild, error) {
 	return buildsResp.Builds, nil
 }
 
+// Returns Paged Builds with Number and URL
+func (j *Job) GetChunkedBuildIds(start int, end int) ([]JobBuild, error) {
+	var buildsResp struct {
+		Builds []JobBuild `json:"allBuilds"`
+	}
+	_, err := j.Jenkins.Requester.GetJSON(j.Base, &buildsResp, map[string]string{"tree": fmt.Sprintf("allBuilds[number,url]{%d,%d}", start, end)})
+	if err != nil {
+		return nil, err
+	}
+	return buildsResp.Builds, nil
+}
+
 func (j *Job) GetUpstreamJobsMetadata() []InnerJob {
 	return j.Raw.UpstreamProjects
 }
