@@ -306,7 +306,7 @@ func (j *Jenkins) GetAllNodes() ([]*Node, error) {
 	computers := new(Computers)
 
 	qr := map[string]string{
-		"depth": "1",
+	//"depth": "1",
 	}
 
 	_, err := j.Requester.GetJSON("/computer", computers, qr)
